@@ -1,0 +1,47 @@
+version: "3.3"
+
+services:
+  database:
+    image: postgres:14-alpine
+    container_name: kpz-postgresql-database-2
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kpz-dev
+      POSTGRES_PASSWORD: kpz
+      POSTGRES_DB: lost_animals
+    volumes:
+      - kpz-db-data:/var/lib/postgresql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "127.0.0.1:5433:5432"
+    networks:
+      - app-db
+    expose:
+      - 5432
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost:5433"]
+      interval: 10s
+      timeout: 1s
+      retries: 3
+
+  database-env:
+    build: .
+    container_name: dbeaver
+    restart: unless-stopped
+    networks:
+      - app-db
+    depends_on:
+      - database
+    volumes:
+      - dbeaver-data:/var/cloudbeaver/workspace:/opt/cloudbeaver/workspace
+    ports:
+      - "9090:8978"
+    expose:
+      - 9090
+
+volumes:
+  kpz-db-data:
+  dbeaver-data:
+
+networks:
+  app-db:

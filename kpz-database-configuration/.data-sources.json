@@ -1,0 +1,44 @@
+{
+  "folders": {},
+  "connections": {
+    "postgresql-template-1": {
+      "provider": "postgresql",
+      "driver": "postgres-jdbc",
+      "name": "PostgreSQL (Template)",
+      "save-password": false,
+      "show-system-objects": false,
+      "read-only": true,
+      "template": true,
+      "configuration": {
+        "host": "localhost",
+        "port": "5432",
+        "database": "postgres",
+        "url": "jdbc:postgresql://localhost:5432/postgres",
+        "type": "dev",
+        "provider-properties": {
+          "@dbeaver-show-non-default-db@": "false"
+        }
+      }
+    },
+    "kpz-db-con": {
+      "provider": "postgresql",
+      "driver": "postgres-jdbc",
+      "name": "Lost Animals",
+      "save-password": true,
+      "show-system-objects": false,
+      "read-only": false,
+      "configuration": {
+        "host": "database",
+        "port": "5432",
+        "database": "lost_animals",
+        "url": "jdbc:postgresql://database:5432/lost_animals",
+        "type": "dev",
+        "provider-properties": {
+          "@dbeaver-show-non-default-db@": "false"
+        },
+        "user": "kpz-dev",
+        "password": "kpz"
+      }
+    }
+  }
+}
