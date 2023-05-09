@@ -29,19 +29,19 @@ public class CoordinatesService {
         this.coordinatesRepository.save(coordinates);
     }
 
-    public void deleteCoordinates(Integer id){
+    public void deleteCoordinatesById(Integer id){
         boolean exists = coordinatesRepository.existsById(id);
         if(!exists){
             throw new IllegalStateException("coordinates with id:" + id + " dose not exists");
         }
-        coordinatesRepository.deleteById(id);
+        this.coordinatesRepository.deleteById(id);
     }
 
-    //TODO write update
-    public void updateCoordinates(Integer id){
-        Coordinates coordinates = this.coordinatesRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "coordinates with id: " + id + " dose not exists"
-                ));
+    public void updateCoordinates(Integer id, Coordinates coordinates){
+        boolean exists = coordinatesRepository.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("coordinates with id:" + id + " dose not exists");
+        }
+        this.coordinatesRepository.save(coordinates);
     }
 }

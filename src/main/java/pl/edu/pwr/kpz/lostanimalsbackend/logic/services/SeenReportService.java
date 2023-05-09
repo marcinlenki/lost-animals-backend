@@ -26,7 +26,6 @@ public class SeenReportService {
                 ));
     }
 
-
     public void addSeenReport(SeenReport seenReport){
         seenReportRepository.save(seenReport);
     }
@@ -36,16 +35,14 @@ public class SeenReportService {
         if(!exists){
             throw new IllegalStateException("seen report with id:" + id + " dose not exists");
         }
-        seenReportRepository.deleteById(id);
+        this.seenReportRepository.deleteById(id);
     }
 
-    //TODO write update
-    public void updateSeenReport(Integer id){
-        SeenReport seenReport = this.seenReportRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "seen report with id: " + id + " dose not exists"
-                ));
-
-
+    public void updateSeenReport(Integer id, SeenReport seenReport){
+        boolean exists = seenReportRepository.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("seen report with id:" + id + " dose not exists");
+        }
+        this.seenReportRepository.save(seenReport);
     }
 }

@@ -25,7 +25,6 @@ public class UserService {
                 ));
     }
 
-
     public void addUser(User user){
         userRepository.save(user);
     }
@@ -35,16 +34,14 @@ public class UserService {
         if(!exists){
             throw new IllegalStateException("user with id:" + id + " dose not exists");
         }
-        userRepository.deleteById(id);
+        this.userRepository.deleteById(id);
     }
 
-    //TODO write update
-    public void updateUser(Integer id){
-        User user = this.userRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "user with id: " + id + " dose not exists"
-                ));
-
-
+    public void updateUser(Integer id, User user){
+        boolean exists = userRepository.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("user with id:" + id + " dose not exists");
+        }
+        this.userRepository.save(user);
     }
 }

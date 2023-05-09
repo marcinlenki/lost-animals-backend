@@ -36,15 +36,15 @@ public class PictureService {
         if(!exists){
             throw new IllegalStateException("picture with id:" + id + " dose not exists");
         }
-        pictureRepository.deleteById(id);
+        this.pictureRepository.deleteById(id);
     }
 
-    //TODO write update
-    public void updatePicture(Integer id){
-        Picture picture = this.pictureRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "picture with id: " + id + " dose not exists"
-                ));
+    public void updatePicture(Integer id, Picture picture){
+        boolean exists = pictureRepository.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("picture with id:" + id + " dose not exists");
+        }
+        this.pictureRepository.save(picture);
 
 
     }

@@ -37,14 +37,14 @@ public class AnimalColorService {
         if(!exists){
             throw new IllegalStateException("animal color with id:" + id + " dose not exists");
         }
-        animalColorRepository.deleteById(id);
+        this.animalColorRepository.deleteById(id);
     }
 
-    //TODO write update
-    public void updateAnimalColor(Integer id){
-        AnimalColor animalColor = this.animalColorRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "animal color with id: " + id + " dose not exists"
-                ));
+    public void updateAnimalColor(Integer id, AnimalColor animalColor){
+        boolean exists = animalColorRepository.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("animal color with id:" + id + " dose not exists");
+        }
+        this.animalColorRepository.save(animalColor);
     }
 }

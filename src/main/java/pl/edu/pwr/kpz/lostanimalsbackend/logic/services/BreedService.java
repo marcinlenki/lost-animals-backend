@@ -15,7 +15,7 @@ public class BreedService {
 
     private final BreedRepository breedRepository;
 
-    public List<Breed> getBreedRepositoryList(){
+    public List<Breed> getBreedList(){
         return this.breedRepository.findAll();
     }
 
@@ -35,14 +35,14 @@ public class BreedService {
         if(!exists){
             throw new IllegalStateException("breed with id:" + id + " dose not exists");
         }
-        breedRepository.deleteById(id);
+        this.breedRepository.deleteById(id);
     }
 
-    //TODO write update
-    public void updateBreed(Integer id){
-        Breed breed = this.breedRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "breed with id: " + id + " dose not exists"
-                ));
+    public void updateBreed(Integer id, Breed breed){
+        boolean exists = breedRepository.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("breed with id:" + id + " dose not exists");
+        }
+        this.breedRepository.save(breed);
     }
 }
