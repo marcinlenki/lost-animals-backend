@@ -25,7 +25,7 @@ services:
       retries: 3
 
   database-env:
-    build: .
+    build: ../kpz-database-configuration
     container_name: dbeaver
     restart: unless-stopped
     networks:
