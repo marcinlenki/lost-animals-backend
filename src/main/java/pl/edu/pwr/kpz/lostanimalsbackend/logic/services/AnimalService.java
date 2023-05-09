@@ -27,7 +27,7 @@ public class AnimalService {
     }
 
     public void addAnimal(Animal animal){
-        animalRepository.save(animal);
+        this.animalRepository.save(animal);
     }
 
     public void deleteAnimalById(Integer id){
@@ -35,15 +35,15 @@ public class AnimalService {
         if(!exists){
             throw new IllegalStateException("animal with id:" + id + " dose not exists");
         }
-        animalRepository.deleteById(id);
+        this.animalRepository.deleteById(id);
     }
 
-    //TODO write update
-    public void updateAnimal(Integer id){
-        Animal animal = this.animalRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "animal with id: " + id + " dose not exists"
-                ));
+    public void updateAnimal(Integer id, Animal animal){
+        boolean exists = animalRepository.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("animal with id:" + id + " dose not exists");
+        }
+        this.animalRepository.save(animal);
 
 
     }

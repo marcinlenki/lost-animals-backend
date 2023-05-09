@@ -34,16 +34,14 @@ public class LostReportService {
         if(!exists){
             throw new IllegalStateException("lost report with id:" + id + " dose not exists");
         }
-        lostReportRepository.deleteById(id);
+        this.lostReportRepository.deleteById(id);
     }
 
-    //TODO write update
-    public void updateLostReport(Integer id){
-        LostReport lostReport = this.lostReportRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "lost report with id: " + id + " dose not exists"
-                ));
-
-
+    public void updateLostReport(Integer id, LostReport lostReport){
+        boolean exists = lostReportRepository.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("lost report with id:" + id + " dose not exists");
+        }
+        this.lostReportRepository.save(lostReport);
     }
 }

@@ -25,7 +25,6 @@ public class TypeService {
                 ));
     }
 
-
     public void addType(Type type){
         typeRepository.save(type);
     }
@@ -35,16 +34,14 @@ public class TypeService {
         if(!exists){
             throw new IllegalStateException("type with id:" + id + " dose not exists");
         }
-        typeRepository.deleteById(id);
+        this.typeRepository.deleteById(id);
     }
 
-    //TODO write update
-    public void updateType(Integer id){
-        Type type = this.typeRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "type with id: " + id + " dose not exists"
-                ));
-
-
+    public void updateType(Integer id, Type type){
+        boolean exists = typeRepository.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("type with id:" + id + " dose not exists");
+        }
+        this.typeRepository.save(type);
     }
 }
