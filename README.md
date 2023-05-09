@@ -5,21 +5,14 @@ Api docs coming soon. <br>
 
 ## Application Setup
 ### TL;DR
-Run:
+After Installing Docker Desktop run:
 
 ```shell
 cd backend-environment-configuration
 bash run.sh
 ```
 
-or
-
-```shell
-cd backend-environment-configuration
-bat run.bat
-```
-
-Depending on your OS.
+**On Windows run the script with gitbash.**
 
 
 ### Using Docker Compose
@@ -56,7 +49,4 @@ bash run.sh backend
 ```
 
 #### Run On Windows
-```shell
-cd backend-environment-configuration
-bat run.bat backend
-```
+**On Windows run the script with gitbash.** (bat script is being fixed)
