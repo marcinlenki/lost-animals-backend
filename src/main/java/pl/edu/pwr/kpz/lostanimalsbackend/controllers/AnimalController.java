@@ -17,6 +17,6 @@ public class AnimalController {
 
     @GetMapping
     public List<Animal> getAll() {
-        return animalService.list();
+        return animalService.getAnimalList();
     }
 }
