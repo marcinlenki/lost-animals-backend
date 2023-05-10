@@ -1,6 +1,6 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -32,7 +32,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "owner")
-    @JsonBackReference
+    @JsonIgnore
     @ToString.Exclude
     private List<Animal> animals;
 
