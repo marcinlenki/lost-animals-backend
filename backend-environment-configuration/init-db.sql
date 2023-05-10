@@ -176,43 +176,57 @@ create table if not exists seen_report
 );
 
 -- ------------------------------------------------------------------
---                          SEED DATABASE
+--                            PROCEDURES
 -- ------------------------------------------------------------------
 
-TRUNCATE animal, animal_color, breed, coordinates, lost_report, picture,
+-- use this procedure to seed database
+create or replace procedure seed_db()
+language plpgsql
+as $$
+begin
+    TRUNCATE animal, animal_color, breed, coordinates, lost_report, picture,
     report_status, seen_report, type, "user" CASCADE;
 
-ALTER SEQUENCE animal_color_pk_sequence RESTART;
-ALTER SEQUENCE animal_pk_sequence RESTART;
-ALTER SEQUENCE breed_pk_sequence RESTART;
-ALTER SEQUENCE coordinates_pk_sequence RESTART;
-ALTER SEQUENCE lost_report_pk_sequence RESTART;
-ALTER SEQUENCE picture_pk_sequence RESTART;
-ALTER SEQUENCE report_status_pk_sequence RESTART;
-ALTER SEQUENCE seen_report_pk_sequence RESTART;
-ALTER SEQUENCE type_pk_sequence RESTART;
-ALTER SEQUENCE user_pk_sequence RESTART;
+    ALTER SEQUENCE animal_color_pk_sequence RESTART;
+    ALTER SEQUENCE animal_pk_sequence RESTART;
+    ALTER SEQUENCE breed_pk_sequence RESTART;
+    ALTER SEQUENCE coordinates_pk_sequence RESTART;
+    ALTER SEQUENCE lost_report_pk_sequence RESTART;
+    ALTER SEQUENCE picture_pk_sequence RESTART;
+    ALTER SEQUENCE report_status_pk_sequence RESTART;
+    ALTER SEQUENCE seen_report_pk_sequence RESTART;
+    ALTER SEQUENCE type_pk_sequence RESTART;
+    ALTER SEQUENCE user_pk_sequence RESTART;
 
-INSERT INTO type (name)
-VALUES ('pies');
+    INSERT INTO type (name)
+    VALUES ('pies');
 
-INSERT INTO breed (name, type_id)
-VALUES ('husky', 1);
+    INSERT INTO breed (name, type_id)
+    VALUES ('husky', 1);
 
-INSERT INTO animal_color (name)
-VALUES ('szary');
+    INSERT INTO animal_color (name)
+    VALUES ('szary');
 
-INSERT INTO "user" (phone_number, name, last_name, email, password)
-VALUES ('123456789', 'Jakub', 'Grabowski', 'email@em.pl', 'pass');
+    INSERT INTO "user" (phone_number, name, last_name, email, password)
+    VALUES ('123456789', 'Jakub', 'Grabowski', 'email@em.pl', 'pass');
 
-INSERT INTO animal (user_id, animal_color_id, breed_id, name, chip)
-VALUES (1, 1, 1, 'Grzegorz', '111111');
+    INSERT INTO animal (user_id, animal_color_id, breed_id, name, chip)
+    VALUES (1, 1, 1, 'Grzegorz', '111111');
 
-INSERT INTO report_status (name)
-VALUES ('ZAGUBIONY');
+    INSERT INTO report_status (name)
+    VALUES ('ZAGUBIONY');
 
-INSERT INTO coordinates(x, y)
-VALUES (122.22, 133.33);
+    INSERT INTO coordinates(x, y)
+    VALUES (122.22, 133.33);
 
-INSERT INTO lost_report (animal_id, report_status_id, coordinates_id, date, description)
-VALUES (1, 1, 1, now(), 'zaginął karakal grzegorz');
+    INSERT INTO lost_report (animal_id, report_status_id, coordinates_id, date, description)
+    VALUES (1, 1, 1, now(), 'zaginął karakal grzegorz');
+
+end $$;
+
+
+
+-- ------------------------------------------------------------------
+--                          SEED DATABASE
+-- ------------------------------------------------------------------
+CALL seed_db()

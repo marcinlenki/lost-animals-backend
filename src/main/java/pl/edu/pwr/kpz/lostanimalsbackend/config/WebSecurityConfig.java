@@ -1,4 +1,4 @@
-package pl.edu.pwr.kpz.lostanimalsbackend.webconfig;
+package pl.edu.pwr.kpz.lostanimalsbackend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
