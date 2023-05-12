@@ -49,4 +49,4 @@ bash run.sh backend
 ```
 
 #### Run On Windows
-**On Windows run the script with gitbash.** (bat script is being fixed)
+**On Windows run the script with gitbash.** (bat script is being fixed).
