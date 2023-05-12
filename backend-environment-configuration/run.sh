@@ -13,7 +13,7 @@ else
 
   if [[ ! "$docker_profile" =~ ^(frontend|backend)$ ]]; then
         echo "Invalid profile ${docker_profile}!"
-        exit 0
+        exit 1
   fi
 fi
 
