@@ -28,14 +28,13 @@ public class LostReport {
     @JoinColumn(name = "report_status_id", referencedColumnName = "id")
     private ReportStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "coordinates_id", referencedColumnName = "id")
-    private Coordinates coordinates;
-
     @Column(name = "date")
     private Date lostDate;
 
     private String description;
+
+    @Embedded
+    private Coordinate coordinate;
 
     @Override
     public boolean equals(Object o) {

@@ -6,7 +6,7 @@ import org.hibernate.Hibernate;
 
 import java.util.Objects;
 
-@Table(name = "picture", schema = "public", catalog = "lost_animals")
+@Table(name = "animal_picture", schema = "public", catalog = "lost_animals")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +23,9 @@ public class Picture {
     @JoinColumn(name = "animal_id", referencedColumnName = "id")
     private Animal animal;
 
-    private byte [] imageBytes;
+    private String contentType;
+
+    private String url;
 
     @Override
     public boolean equals(Object o) {

@@ -28,9 +28,8 @@ public class SeenReport {
     @JoinColumn(name = "animal_id", referencedColumnName = "id")
     private Animal animal;
 
-    @ManyToOne
-    @JoinColumn(name = "coordinates_id", referencedColumnName = "id")
-    private Coordinates coordinates;
+    @Embedded
+    private Coordinate coordinate;
 
     @Column(name = "date")
     private Date seenDate;
