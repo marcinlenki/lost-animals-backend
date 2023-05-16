@@ -8,7 +8,7 @@ import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.LostReport;
 import java.util.List;
 
 @RestController
-@RequestMapping("lost-reports")
+@RequestMapping("lost")
 @RequiredArgsConstructor
 public class LostReportController {
 

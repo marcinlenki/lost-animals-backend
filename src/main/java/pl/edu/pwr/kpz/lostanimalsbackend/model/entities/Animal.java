@@ -39,6 +39,9 @@ public class Animal {
     @JoinColumn(name = "animal_color_id", referencedColumnName = "id")
     private AnimalColor color;
 
+    @Enumerated(EnumType.STRING)
+    private Sex sex;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

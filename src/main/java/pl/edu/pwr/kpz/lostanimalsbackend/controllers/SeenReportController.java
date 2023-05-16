@@ -8,7 +8,7 @@ import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.SeenReport;
 import java.util.List;
 
 @RestController
-@RequestMapping("seen-reports")
+@RequestMapping("seen")
 @RequiredArgsConstructor
 public class SeenReportController {
     private final SeenReportService seenReportService;
