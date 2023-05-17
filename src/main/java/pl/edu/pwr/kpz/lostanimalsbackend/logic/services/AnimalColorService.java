@@ -4,8 +4,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.AnimalColorRepository;
-import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.AnimalRepository;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.AnimalColor;
 
 import java.util.List;
@@ -14,7 +12,6 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class AnimalColorService {
-
     private final AnimalColorRepository animalColorRepository;
 
     public List<AnimalColor> getAnimalColorList(){
@@ -47,4 +44,6 @@ public class AnimalColorService {
         }
         this.animalColorRepository.save(animalColor);
     }
+
+
 }

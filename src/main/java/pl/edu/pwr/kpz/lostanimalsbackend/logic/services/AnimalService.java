@@ -2,8 +2,12 @@ package pl.edu.pwr.kpz.lostanimalsbackend.logic.services;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.stereotype.Service;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.AnimalRepository;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalResponseDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
 
 import java.util.List;
@@ -12,8 +16,8 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class AnimalService {
-
     private final AnimalRepository animalRepository;
+    private final ModelMapper modelMapper;
 
     public List<Animal> getAnimalList(){
         return this.animalRepository.findAll();
@@ -44,7 +48,12 @@ public class AnimalService {
             throw new IllegalStateException("animal with id:" + id + " dose not exists");
         }
         this.animalRepository.save(animal);
-
-
     }
+
+    public Animal convertDtoToEntity(AnimalResponseDTO animalResponseDTO){
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.LOOSE);
+        return modelMapper.map(animalResponseDTO, Animal.class);
+    }
+
 }

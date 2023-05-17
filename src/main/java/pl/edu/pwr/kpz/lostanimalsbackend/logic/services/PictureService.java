@@ -12,7 +12,6 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class PictureService {
-
     private final PictureRepository pictureRepository;
 
     public List<Picture> getPictureList(){
