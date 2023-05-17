@@ -12,7 +12,6 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class BreedService {
-
     private final BreedRepository breedRepository;
 
     public List<Breed> getBreedList(){
