@@ -2,6 +2,7 @@ package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalResponseDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.AnimalService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
@@ -37,5 +38,10 @@ public class AnimalController {
     @PutMapping(path = "/{id}")
     public void updateAnimal(@PathVariable("id") Integer id, @RequestBody Animal animal){
         animalService.updateAnimal(id, animal);
+    }
+
+    @PostMapping(path = "/test")
+    public void testDTO(@RequestBody AnimalResponseDTO animalResponseDTO){
+        animalService.addAnimalByDTO(animalResponseDTO);
     }
 }

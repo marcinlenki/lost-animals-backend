@@ -1,5 +1,6 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.model.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -12,9 +13,13 @@ import java.util.Objects;
 @ToString
 public class UserResponseDTO {
     private int id;
+    @NotNull
     private String name;
+    @NotNull
     private String lastName;
+    @NotNull
     private String phoneNumber;
+    @NotNull
     private String email;
 
     @Override
