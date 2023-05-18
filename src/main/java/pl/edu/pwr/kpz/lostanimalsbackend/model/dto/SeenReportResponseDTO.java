@@ -1,5 +1,6 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.model.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -13,12 +14,17 @@ import java.util.Objects;
 @ToString
 public class SeenReportResponseDTO {
     private int id;
+    @NotNull
     private Date lostDate;
+    @NotNull
     private double x;
+    @NotNull
     private double y;
     private String description;
 
+    @NotNull
     private int userId;
+    @NotNull
     private int animalId;
 
     @Override

@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.stereotype.Service;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.AnimalRepository;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalResponseDTO;
@@ -15,7 +14,7 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AnimalService {
+public class AnimalService implements ConvertRequestDTO<Animal, AnimalResponseDTO> {
     private final AnimalRepository animalRepository;
     private final ModelMapper modelMapper;
 
@@ -50,10 +49,21 @@ public class AnimalService {
         this.animalRepository.save(animal);
     }
 
-    public Animal convertDtoToEntity(AnimalResponseDTO animalResponseDTO){
-        modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.LOOSE);
-        return modelMapper.map(animalResponseDTO, Animal.class);
+    public void addAnimalByDTO(AnimalResponseDTO animalResponseDTO){
+        Animal animal = convertDtoToEmptyEntity(animalResponseDTO);
+        this.animalRepository.save(animal);
+
     }
 
+    @Override
+    public Animal convertDtoToEmptyEntity(AnimalResponseDTO dto) {
+        this.modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STANDARD);
+        return this.modelMapper.map(dto, Animal.class);
+    }
+
+    @Override
+    public Animal convertDtoToFullEntity(AnimalResponseDTO dto) {
+        return null;
+    }
 }
