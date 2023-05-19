@@ -4,11 +4,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.AnimalRepository;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.ReportStatusRepository;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.LostReportRequestDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.LostReportResponseDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.LostReport;
 
 @Component
-public class LostReportDTOMapper extends DTOMapper<LostReport, LostReportResponseDTO> {
+public class LostReportDTOMapper extends DTOMapper<LostReport, LostReportResponseDTO, LostReportRequestDTO> {
     private final AnimalRepository animalRepository;
     private final ReportStatusRepository reportStatusRepository;
 
@@ -37,5 +38,10 @@ public class LostReportDTOMapper extends DTOMapper<LostReport, LostReportRespons
                                 "status with id: " + lostReport.getStatus().getId() + " dose not exists"
                         )));
         return lostReport;
+    }
+
+    @Override
+    public LostReportRequestDTO convertEntityToDTO(LostReport entity) {
+        return null;
     }
 }

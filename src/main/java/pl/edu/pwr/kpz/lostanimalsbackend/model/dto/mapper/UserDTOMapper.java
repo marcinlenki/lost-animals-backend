@@ -2,11 +2,12 @@ package pl.edu.pwr.kpz.lostanimalsbackend.model.dto.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.UserRequestDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.UserResponseDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.User;
 
 @Component
-public class UserDTOMapper extends DTOMapper<User, UserResponseDTO> {
+public class UserDTOMapper extends DTOMapper<User, UserResponseDTO, UserRequestDTO> {
     public UserDTOMapper(ModelMapper modelMapper) {
         super(modelMapper);
     }
@@ -19,5 +20,10 @@ public class UserDTOMapper extends DTOMapper<User, UserResponseDTO> {
     @Override
     public User convertDtoToFullEntity(UserResponseDTO dto) {
         return convertDtoToEmptyEntity(dto);
+    }
+
+    @Override
+    public  UserRequestDTO convertEntityToDTO(User entity) {
+        return null;
     }
 }
