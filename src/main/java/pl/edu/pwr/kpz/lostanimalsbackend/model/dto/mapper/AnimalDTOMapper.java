@@ -5,11 +5,12 @@ import org.springframework.stereotype.Component;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.AnimalColorRepository;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.BreedRepository;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.UserRepository;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalRequestDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalResponseDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
 
 @Component
-public class AnimalDTOMapper extends DTOMapper<Animal, AnimalResponseDTO> {
+public class AnimalDTOMapper extends DTOMapper<Animal, AnimalResponseDTO, AnimalRequestDTO> {
     private final UserRepository userRepository;
     private final AnimalColorRepository animalColorRepository;
     private final BreedRepository breedRepository;
@@ -44,5 +45,10 @@ public class AnimalDTOMapper extends DTOMapper<Animal, AnimalResponseDTO> {
                                 "breed with id: " + animal.getBreed().getId() + " dose not exists"
                         )));
         return animal;
+    }
+
+    @Override
+    public AnimalRequestDTO convertEntityToDTO(Animal entity) {
+        return null;
     }
 }
