@@ -38,4 +38,5 @@ public class UserController {
     public void updateUser(@PathVariable("id") Integer id, @RequestBody User user){
         userService.updateUser(id, user);
     }
+
 }
