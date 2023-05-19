@@ -2,11 +2,9 @@ package pl.edu.pwr.kpz.lostanimalsbackend.logic.services;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.AnimalRepository;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalResponseDTO;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.mapper.AnimalDTOMapper;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
 
 import java.util.List;
@@ -14,9 +12,9 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AnimalService implements ConvertRequestDTO<Animal, AnimalResponseDTO> {
+public class AnimalService {
     private final AnimalRepository animalRepository;
-    private final ModelMapper modelMapper;
+    private final AnimalDTOMapper animalDTOMapper;
 
     public List<Animal> getAnimalList(){
         return this.animalRepository.findAll();
@@ -49,21 +47,4 @@ public class AnimalService implements ConvertRequestDTO<Animal, AnimalResponseDT
         this.animalRepository.save(animal);
     }
 
-    public void addAnimalByDTO(AnimalResponseDTO animalResponseDTO){
-        Animal animal = convertDtoToEmptyEntity(animalResponseDTO);
-        this.animalRepository.save(animal);
-
-    }
-
-    @Override
-    public Animal convertDtoToEmptyEntity(AnimalResponseDTO dto) {
-        this.modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.STANDARD);
-        return this.modelMapper.map(dto, Animal.class);
-    }
-
-    @Override
-    public Animal convertDtoToFullEntity(AnimalResponseDTO dto) {
-        return null;
-    }
 }
