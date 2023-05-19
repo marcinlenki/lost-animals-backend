@@ -44,7 +44,5 @@ public class AnimalService {
             throw new IllegalStateException("animal with id:" + id + " dose not exists");
         }
         this.animalRepository.save(animal);
-
-
     }
 }
