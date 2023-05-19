@@ -41,6 +41,6 @@ public class SeenReportDTOMapper extends DTOMapper<SeenReport, SeenReportRespons
 
     @Override
     public SeenReportRequestDTO convertEntityToDTO(SeenReport entity) {
-        return null;
+        return this.modelMapper.map(entity, SeenReportRequestDTO.class);
     }
 }

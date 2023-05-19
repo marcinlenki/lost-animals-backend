@@ -24,6 +24,6 @@ public class UserDTOMapper extends DTOMapper<User, UserResponseDTO, UserRequestD
 
     @Override
     public  UserRequestDTO convertEntityToDTO(User entity) {
-        return null;
+        return this.modelMapper.map(entity, UserRequestDTO.class);
     }
 }

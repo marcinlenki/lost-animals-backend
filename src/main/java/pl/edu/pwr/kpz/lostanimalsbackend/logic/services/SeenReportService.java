@@ -46,5 +46,4 @@ public class SeenReportService {
         }
         this.seenReportRepository.save(seenReport);
     }
-
 }

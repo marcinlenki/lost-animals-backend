@@ -49,6 +49,6 @@ public class AnimalDTOMapper extends DTOMapper<Animal, AnimalResponseDTO, Animal
 
     @Override
     public AnimalRequestDTO convertEntityToDTO(Animal entity) {
-        return null;
+        return this.modelMapper.map(entity, AnimalRequestDTO.class);
     }
 }
