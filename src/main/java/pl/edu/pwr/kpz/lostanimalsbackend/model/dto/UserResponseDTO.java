@@ -2,16 +2,15 @@ package pl.edu.pwr.kpz.lostanimalsbackend.model.dto;
 
 import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
+import java.util.List;
+
+@Data
 public class UserResponseDTO {
+    private int id;
     private String name;
     private String lastName;
     private String phoneNumber;
     private String email;
 
-    private int roleId;
+    private List<AnimalResponseDTO> animals;
 }

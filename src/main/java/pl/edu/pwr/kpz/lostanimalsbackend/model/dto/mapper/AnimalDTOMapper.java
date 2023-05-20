@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.AnimalColorRepository;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.BreedRepository;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.UserRepository;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalRequestDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalResponseDTO;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalRequestDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
 
 @Component
-public class AnimalDTOMapper extends DTOMapper<Animal, AnimalResponseDTO, AnimalRequestDTO> {
+public class AnimalDTOMapper extends DTOMapper<Animal, AnimalRequestDTO, AnimalResponseDTO> {
     private final UserRepository userRepository;
     private final AnimalColorRepository animalColorRepository;
     private final BreedRepository breedRepository;
@@ -22,12 +22,12 @@ public class AnimalDTOMapper extends DTOMapper<Animal, AnimalResponseDTO, Animal
     }
 
     @Override
-    public Animal convertDtoToEmptyEntity(AnimalResponseDTO dto) {
+    public Animal convertDtoToEmptyEntity(AnimalRequestDTO dto) {
         return this.modelMapper.map(dto, Animal.class);
     }
 
     @Override
-    public Animal convertDtoToFullEntity(AnimalResponseDTO dto) {
+    public Animal convertDtoToFullEntity(AnimalRequestDTO dto) {
         Animal animal = convertDtoToEmptyEntity(dto);
         animal.setOwner(
                 userRepository.findById(animal.getOwner().getId())
@@ -48,7 +48,7 @@ public class AnimalDTOMapper extends DTOMapper<Animal, AnimalResponseDTO, Animal
     }
 
     @Override
-    public AnimalRequestDTO convertEntityToDTO(Animal entity) {
-        return this.modelMapper.map(entity, AnimalRequestDTO.class);
+    public AnimalResponseDTO convertEntityToDTO(Animal entity) {
+        return this.modelMapper.map(entity, AnimalResponseDTO.class);
     }
 }

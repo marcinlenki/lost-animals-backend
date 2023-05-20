@@ -27,8 +27,8 @@ public class AnimalService {
                 ));
     }
 
-    public void addAnimal(Animal animal){
-        this.animalRepository.save(animal);
+    public Animal addAnimal(Animal animal){
+        return animalRepository.save(animal);
     }
 
     public void deleteAnimalById(Integer id){
@@ -46,5 +46,4 @@ public class AnimalService {
         }
         this.animalRepository.save(animal);
     }
-
 }
