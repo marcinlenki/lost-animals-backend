@@ -44,7 +44,8 @@ public class Animal {
     private Sex sex;
 
     @OneToMany(mappedBy = "animal")
-    List<AnimalPicture> animalPictures;
+    @ToString.Exclude
+    private List<AnimalPicture> animalPictures;
 
     @Override
     public boolean equals(Object o) {
