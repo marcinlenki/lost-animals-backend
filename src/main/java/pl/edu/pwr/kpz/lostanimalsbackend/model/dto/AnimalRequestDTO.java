@@ -8,16 +8,16 @@ import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Sex;
 
 @Data
 public class AnimalRequestDTO {
-    @NotBlank(message = "animal name shouldn't be blank")
+    @NotBlank(message = "Animal name shouldn't be blank")
     private String name;
     private String chip;
-    @NotNull(message = "animal sex shouldn't be null")
+    @NotNull(message = "Animal sex shouldn't be null")
     private Sex sex;
 
-    @Min(value = 1)
+    @Min(value = 1, message = "Wrong owner id in animal")
     private int ownerId;
-    @Min(value = 1, groups = SeenReportRequestInfo.class)
+    @Min(value = 1, message = "Wrong animal color id in animal", groups = SeenReportRequestInfo.class)
     private int animalColorId;
-    @Min(value = 1, groups = SeenReportRequestInfo.class)
+    @Min(value = 1, message = "Wrong breed id in animal", groups = SeenReportRequestInfo.class)
     private int breedId;
 }

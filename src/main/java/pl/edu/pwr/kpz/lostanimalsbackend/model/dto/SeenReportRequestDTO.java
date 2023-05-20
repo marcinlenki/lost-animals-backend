@@ -12,15 +12,16 @@ import java.util.Date;
 
 @Data
 public class SeenReportRequestDTO {
-    @Past(groups = SeenReportRequestInfo.class)
+    @Past(message = "The date should be in the past ", groups = SeenReportRequestInfo.class)
     @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date lostDate;
-    @NotNull(groups = SeenReportRequestInfo.class)
+    @NotNull(message = "Seen report coordinate shouldn't be null", groups = SeenReportRequestInfo.class)
     private Coordinate coordinate;
-    @NotNull(groups = SeenReportRequestInfo.class)
+    @NotNull(message = "Seen report description shouldn't be null", groups = SeenReportRequestInfo.class)
     private String description;
-    @Min(value = 1,groups = SeenReportRequestInfo.class)
+    @Min(value = 1, groups = SeenReportRequestInfo.class, message = "Wrong user id in seen report")
     private int userId;
     @Valid
+    @NotNull(message = "Seen report animal shouldn't be null")
     private AnimalRequestDTO animal;
 }

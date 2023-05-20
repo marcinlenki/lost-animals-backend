@@ -5,15 +5,15 @@ import lombok.Data;
 
 @Data
 public class UserRequestDTO {
-    @NotBlank(message = "name shouldn,t be empty")
+    @NotBlank(message = "User name shouldn,t be blank")
     private String name;
-    @NotBlank
+    @NotBlank(message = "User last name shouldn,t be blank")
     private String lastName;
-    @NotNull
-    @Pattern(regexp = "^\\d{10}$")
+    @NotNull(message = "User phone number shouldn,t be null")
+    @Pattern(regexp = "^\\d{9}$", message = "User phone number wrong pattern")
     private String phoneNumber;
-    @Email
+    @Email(message = "User email wrong pattern")
     private String email;
-    @Min(value = 1)
+    @Min(value = 1, message = "Wrong role id in user")
     private int roleId;
 }
