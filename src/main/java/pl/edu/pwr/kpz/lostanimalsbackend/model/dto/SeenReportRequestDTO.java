@@ -1,21 +1,16 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.model.dto;
 
-import lombok.*;
+import lombok.Data;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Coordinate;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class SeenReportRequestDTO {
-    private int id;
-    private UserRequestDTO user;
-    private AnimalRequestDTO animal;
+    private Date lostDate;
     private Coordinate coordinate;
-    private Date seenDate;
     private String description;
-}
 
+    private int userId;
+    private AnimalRequestDTO animal;
+}

@@ -5,16 +5,18 @@ import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Coordinate;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class SeenReportResponseDTO {
-    private Date lostDate;
-    private Coordinate coordinate;
-    private String description;
-
+    private int id;
+//    private UserResponseDTO user; //id imie nazwisko tele
     private int userId;
-    private int animalId;
+    private String userName;
+    private String userLastName;
+    private String userPhoneNumber;
+
+    private AnimalResponseDTO animal;
+    private Coordinate coordinate;
+    private Date seenDate;
+    private String description;
 }
+

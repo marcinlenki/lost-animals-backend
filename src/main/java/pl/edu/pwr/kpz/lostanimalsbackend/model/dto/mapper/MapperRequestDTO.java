@@ -6,5 +6,6 @@ package pl.edu.pwr.kpz.lostanimalsbackend.model.dto.mapper;
  * @param <U> DTO
  */
 public interface MapperRequestDTO<T,U> {
-    U convertEntityToDTO(T entity);
+    T convertDtoToEmptyEntity(U dto);
+    T convertDtoToFullEntity(U dto);
 }

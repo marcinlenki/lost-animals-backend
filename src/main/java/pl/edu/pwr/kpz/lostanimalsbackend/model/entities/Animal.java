@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.NaturalId;
 
+import java.util.List;
 import java.util.Objects;
 
 @Table(name = "animal", schema = "public", catalog = "lost_animals")
@@ -41,6 +42,9 @@ public class Animal {
 
     @Enumerated(EnumType.STRING)
     private Sex sex;
+
+    @OneToMany(mappedBy = "animal")
+    List<AnimalPicture> animalPictures;
 
     @Override
     public boolean equals(Object o) {

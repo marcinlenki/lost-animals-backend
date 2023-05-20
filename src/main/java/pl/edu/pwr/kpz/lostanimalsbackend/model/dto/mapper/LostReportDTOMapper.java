@@ -9,7 +9,7 @@ import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.LostReportResponseDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.LostReport;
 
 @Component
-public class LostReportDTOMapper extends DTOMapper<LostReport, LostReportResponseDTO, LostReportRequestDTO> {
+public class LostReportDTOMapper extends DTOMapper<LostReport, LostReportRequestDTO, LostReportResponseDTO> {
     private final AnimalRepository animalRepository;
     private final ReportStatusRepository reportStatusRepository;
 
@@ -20,12 +20,12 @@ public class LostReportDTOMapper extends DTOMapper<LostReport, LostReportRespons
     }
 
     @Override
-    public LostReport convertDtoToEmptyEntity(LostReportResponseDTO dto) {
+    public LostReport convertDtoToEmptyEntity(LostReportRequestDTO dto) {
         return this.modelMapper.map(dto, LostReport.class);
     }
 
     @Override
-    public LostReport convertDtoToFullEntity(LostReportResponseDTO dto) {
+    public LostReport convertDtoToFullEntity(LostReportRequestDTO dto) {
         LostReport lostReport = convertDtoToEmptyEntity(dto);
         lostReport.setAnimal(
                 animalRepository.findById(lostReport.getAnimal().getId())
@@ -41,7 +41,7 @@ public class LostReportDTOMapper extends DTOMapper<LostReport, LostReportRespons
     }
 
     @Override
-    public LostReportRequestDTO convertEntityToDTO(LostReport entity) {
-        return null;
+    public LostReportResponseDTO convertEntityToDTO(LostReport entity) {
+        return this.modelMapper.map(entity, LostReportResponseDTO.class);
     }
 }
