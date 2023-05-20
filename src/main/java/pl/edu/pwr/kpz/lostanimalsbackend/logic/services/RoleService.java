@@ -12,7 +12,6 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class RoleService {
-
     private final RoleRepository roleRepository;
 
     public List<Role> getRoleList(){

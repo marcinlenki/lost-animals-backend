@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.UserRepository;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.mapper.UserDTOMapper;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.User;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final UserDTOMapper userDTOMapper;
 
     public List<User> getUserList(){
         return this.userRepository.findAll();
@@ -44,4 +46,5 @@ public class UserService {
         }
         this.userRepository.save(user);
     }
+
 }
