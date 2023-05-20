@@ -29,9 +29,6 @@ public class AnimalPicture {
 
     private String url;
 
-//    @Transient
-//    private String imageName;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

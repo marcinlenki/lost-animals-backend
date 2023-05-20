@@ -4,6 +4,8 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +18,8 @@ import java.nio.file.Path;
 
 @Configuration
 public class FileStorageConfig {
+    private static final Logger logger = LoggerFactory.getLogger(FileStorageConfig.class);
+
     @Value("${access.key.id}")
     private String accessKeyId;
 
@@ -33,16 +37,15 @@ public class FileStorageConfig {
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    public void doSomethingAfterStartup() {
+    public void initializeImageDirectory() {
         try {
             Files.createDirectories(Path.of(imagesDirPath));
 
         } catch (IOException e) {
-            // TODO Replace with Logger
-            System.out.println(e.getMessage());
-            System.out.println("Unable to initialize images directory, " +
-                    "the images will be saved in the current working directory.");
+            String errorMessage = "Unable to initialize images directory, " +
+                    "the images will be saved in the current working directory.";
 
+            logger.warn(errorMessage, e);
             imagesDirPath = "";
         }
     }

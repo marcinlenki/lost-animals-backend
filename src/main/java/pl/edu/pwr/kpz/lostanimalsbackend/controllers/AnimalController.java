@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.AnimalService;
-import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.PictureService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.AnimalPicture;
 
@@ -15,7 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnimalController {
     private final AnimalService animalService;
-    private final PictureService pictureService;
 
     @GetMapping
     public List<Animal> getAnimalList() {
@@ -44,26 +42,27 @@ public class AnimalController {
 
     @GetMapping("{id}/pictures")
     public List<AnimalPicture> getAnimalPictures(@PathVariable(name = "id") Integer animalId) {
-        return null;
+        return animalService.getAnimalPictures(animalId);
     }
 
     @PostMapping("{id}/pictures")
-    public AnimalPicture addAnimalPicture(@PathVariable("id") Integer animalId,
-                                                @RequestParam("file") MultipartFile file) {
+    public Object addAnimalPictures(@PathVariable("id") Integer animalId,
+                                                    @RequestParam("files") MultipartFile[] files) {
 
-        return pictureService.save(file, animalId);
-    }
-
-    @PostMapping("{id}/pictures")
-    public List<AnimalPicture> addAnimalPictures(@PathVariable("id") Integer animalId,
-                                          @RequestParam("file") MultipartFile[] files) {
-
-        return null;
+        return animalService.uploadAnimalPictures(files, animalId);
     }
 
     @DeleteMapping("{id}/pictures/{pictureId}")
     public void deleteAnimalPicture(@PathVariable("id") Integer animalId,
                                     @PathVariable("pictureId") Integer pictureId) {
 
+        animalService.deleteAnimalPicture(animalId, pictureId);
+    }
+
+    @DeleteMapping("{id}/pictures")
+    public void deleteAnimalPictures(@PathVariable("id") Integer animalId,
+                                    @RequestParam("ids") String pictureIds) {
+
+        animalService.deleteAnimalPictures(animalId, pictureIds);
     }
 }
