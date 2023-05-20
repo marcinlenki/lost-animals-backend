@@ -20,8 +20,9 @@ public class AnimalPicture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "animal_id", referencedColumnName = "id")
+    @ToString.Exclude
     @JsonIgnore
     private Animal animal;
 
