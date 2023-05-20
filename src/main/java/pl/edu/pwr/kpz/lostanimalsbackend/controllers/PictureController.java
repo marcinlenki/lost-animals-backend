@@ -2,7 +2,6 @@ package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.PictureService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.AnimalPicture;
 
@@ -27,10 +26,5 @@ public class PictureController {
     @DeleteMapping(path = "/{id}")
     public void deletePictureById(@PathVariable("id") Integer id) throws Exception{
         pictureService.deletePictureById(id);
-    }
-
-    @PostMapping("test")
-    public void test(@RequestParam("file") MultipartFile multipartFile) {
-        pictureService.saveAsync(multipartFile, 1);
     }
 }
