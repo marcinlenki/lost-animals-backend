@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.LostReportRepository;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.mapper.LostReportDTOMapper;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.LostReport;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LostReportService {
     private final LostReportRepository lostReportRepository;
+    private final LostReportDTOMapper lostReportDTOMapper;
 
     public List<LostReport> getLostReportList(){
         return this.lostReportRepository.findAll();

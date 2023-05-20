@@ -12,7 +12,6 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class ReportStatusService {
-
     private final ReportStatusRepository reportStatusRepository;
 
     public List<ReportStatus> getReportStatusList(){
