@@ -44,6 +44,7 @@ public class Animal {
     private Sex sex;
 
     @OneToMany(mappedBy = "animal")
+    @ToString.Exclude
     private List<AnimalPicture> animalPictures;
 
     @Override
