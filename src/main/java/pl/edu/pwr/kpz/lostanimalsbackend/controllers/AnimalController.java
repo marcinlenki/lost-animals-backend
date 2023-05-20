@@ -2,7 +2,6 @@ package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.AnimalService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
 
