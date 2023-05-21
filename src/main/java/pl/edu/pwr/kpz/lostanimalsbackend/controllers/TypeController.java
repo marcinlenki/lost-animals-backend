@@ -8,8 +8,6 @@ import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Type;
 
 import java.util.List;
 
-// TODO should breed endpoint be nested?
-
 @RestController
 @RequestMapping("types")
 @RequiredArgsConstructor
@@ -50,15 +48,5 @@ public class TypeController {
     @PostMapping("{id}/breeds")
     public Breed addBreedOfType(@PathVariable("id") int typeId, @RequestBody Breed breed) {
         return typeService.addNewBreedOfType(typeId, breed);
-    }
-
-    @PutMapping("{id}/breeds/{breedId}")
-    public Breed updateBreedOfType(@PathVariable("id") int typeId, @PathVariable int breedId, @RequestBody Breed breed) {
-        return typeService.updateBreed(typeId, breed);
-    }
-
-    @DeleteMapping("{id}/breeds/{pictureId}")
-    public void deleteAnimalBreed(@PathVariable("id") int typeId, @PathVariable("pictureId") int pictureId) {
-        typeService.deleteBreedOfType(typeId, pictureId);
     }
 }

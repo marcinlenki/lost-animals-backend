@@ -9,6 +9,10 @@ import org.hibernate.Hibernate;
 
 import java.util.Objects;
 
+/**
+ * Base class for all entities.
+ */
+
 @MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,17 +23,6 @@ public class DatabaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
-
-//    @Override
-//    @JsonIgnore
-//    public int getIdentity() {
-//        return id;
-//    }
-//
-//    @Override
-//    public void setNewIdentity(int newIdentity) {
-//        this.id = newIdentity;
-//    }
 
     @Override
     public boolean equals(Object o) {

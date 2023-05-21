@@ -84,6 +84,9 @@ create table if not exists role
         primary key (id)
 );
 
+create unique index if not exists role_name_uindex
+    on role (name);
+
 create table if not exists "user"
 (
     id           integer default nextval('user_pk_sequence'::regclass) not null,
@@ -102,15 +105,18 @@ create table if not exists "user"
 create unique index if not exists user_phone_number_uindex
     on "user" (phone_number);
 
+create unique index if not exists user_email_uindex
+    on "user" (email);
+
 create table if not exists animal
 (
     id              integer default nextval('animal_pk_sequence'::regclass) not null,
     user_id         integer,
     animal_color_id integer                                                 not null,
     breed_id        integer                                                 not null,
-    name            varchar                                                 not null,
+    name            varchar,
     chip            varchar,
-    sex             varchar,
+    sex             varchar default 'NIEZNANA'::character varying           not null,
     constraint animal_pk
         primary key (id),
     constraint animal_user_null_fk
@@ -128,7 +134,8 @@ create unique index if not exists animal_chip_uindex
 
 alter table animal
     add constraint check_name
-        check ((sex)::text = ANY ((ARRAY ['SAMIEC'::character varying, 'SAMICA'::character varying])::text[]));
+        check ((sex)::text = ANY (ARRAY [('SAMIEC'::character varying)::text, ('SAMICA'::character varying)::text, ('NIEZNANA'::character varying)::text]));
+
 
 create table if not exists animal_picture
 (
@@ -161,6 +168,11 @@ create table if not exists lost_report
         foreign key (report_status_id) references report_status
 );
 
+alter table lost_report
+    add constraint valid_coordinates_check
+        check (((geo_x >= ('-90'::integer)::double precision) AND (geo_x <= (90)::double precision)) AND
+               ((geo_y >= ('-180'::integer)::double precision) AND (geo_y <= (180)::double precision)));
+
 create table if not exists seen_report
 (
     id          integer default nextval('seen_report_pk_sequence'::regclass) not null,
@@ -179,8 +191,12 @@ create table if not exists seen_report
         foreign key (user_id) references "user"
 );
 
-create unique index if not exists role_name_uindex
-    on role (name);
+alter table seen_report
+    add constraint valid_coordinates_check
+        check (((geo_x >= ('-90'::integer)::double precision) AND (geo_x <= (90)::double precision)) AND
+               ((geo_y >= ('-180'::integer)::double precision) AND (geo_y <= (180)::double precision)));
+
+
 
 -- ------------------------------------------------------------------
 --                            PROCEDURES
@@ -233,7 +249,7 @@ begin
     VALUES ('ODNALEZIONY');
 
     INSERT INTO lost_report (animal_id, report_status_id, date, description, geo_x, geo_y)
-    VALUES (1, 1, now(), 'zaginął karakal grzegorz', 100.25, 99.995);
+    VALUES (1, 1, now(), 'zaginął karakal grzegorz', 90, 180);
 
 end $$;
 

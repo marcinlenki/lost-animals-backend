@@ -15,9 +15,6 @@ import java.util.List;
 @ToString(callSuper = true)
 @Builder
 public class User extends DatabaseEntity {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private int id;
 
     private String name;
 

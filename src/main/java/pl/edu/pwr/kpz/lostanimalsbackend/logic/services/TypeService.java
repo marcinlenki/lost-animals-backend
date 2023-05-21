@@ -30,12 +30,4 @@ public class TypeService extends SimpleCrudService<Type> {
         breed.setType(type);
         return breedService.add(breed);
     }
-
-    public Breed updateBreed(int breedId, Breed breed) throws RuntimeException {
-        return breedService.update(breedId, breed);
-    }
-
-    public void deleteBreedOfType(int typeId, int breedId) throws RuntimeException {
-        breedService.delete(breedId);
-    }
 }

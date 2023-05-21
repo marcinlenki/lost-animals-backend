@@ -11,5 +11,4 @@ public class AnimalColorService extends SimpleCrudService<AnimalColor> {
     public AnimalColorService(BaseRepository<AnimalColor> repository) {
         super(repository, LoggerFactory.getLogger(AnimalColorService.class));
     }
-
 }

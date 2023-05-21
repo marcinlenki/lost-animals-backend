@@ -32,7 +32,7 @@ public abstract class SimpleCrudService<T extends DatabaseEntity>
         return repository
                 .findById(id)
                 .orElseThrow(() -> {
-                    var e = new IllegalArgumentException("Entity id mustn't be set!");
+                    var e = new EntityNotFoundException("Entity of id " + id + " not found!");
                     logger.error(e.getMessage(), e);
                     return e;
                 });

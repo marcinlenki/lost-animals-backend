@@ -15,9 +15,6 @@ import java.util.List;
 @ToString(callSuper = true)
 @Builder
 public class Animal extends DatabaseEntity {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private int id;
 
     public Animal(int id) {
         super(id);
@@ -47,16 +44,4 @@ public class Animal extends DatabaseEntity {
     @ToString.Exclude
     private List<AnimalPicture> animalPictures;
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-//        Animal animal = (Animal) o;
-//        return getId() != 0 && Objects.equals(getId(), animal.getId());
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return getClass().hashCode();
-//    }
 }

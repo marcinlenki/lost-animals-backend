@@ -28,10 +28,16 @@ public class SeenReportService extends MappedCrudService<SeenReport, SeenReportR
         var entity = mapper.convertDtoToFullEntity(seenReportRequestDTO);
         entity.setId(0);
 
-        // save the animal
-        var mappedAnimal = animalDTOMapper.convertDtoToFullEntity(seenReportRequestDTO.getAnimal());
-        var newAnimal = animalService.addSimple(mappedAnimal);
-        entity.setAnimal(newAnimal);
+        // if animalId is null than at this point AnimalRequestDTO must have been passed
+        if (seenReportRequestDTO.getAnimalId() == null) {
+
+            // save new animal without an owner
+            var mappedAnimal = animalDTOMapper.convertDtoToFullEntity(seenReportRequestDTO.getAnimal());
+            mappedAnimal.setOwner(null);
+
+            var newAnimal = animalService.addSimple(mappedAnimal);
+            entity.setAnimal(newAnimal);
+        }
 
         return mapper.convertEntityToDTO(repository.save(entity));
     }

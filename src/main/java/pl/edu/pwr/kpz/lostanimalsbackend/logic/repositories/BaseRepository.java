@@ -6,6 +6,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import java.util.Collections;
 import java.util.List;
 
+@SuppressWarnings("unused") // future feature
 @NoRepositoryBean
 public interface BaseRepository <T> extends JpaRepository<T, Integer> {
     default List<T> getByNaturalId(String keyValue, String ... keyName) {

@@ -1,9 +1,11 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.SeenReportService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.SeenReportRequestDTO;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.SeenReportRequestInfo;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.SeenReportResponseDTO;
 
 import java.util.List;
@@ -25,7 +27,7 @@ public class SeenReportController {
     }
 
     @PostMapping
-    public SeenReportResponseDTO addSeenReport(@RequestBody SeenReportRequestDTO seenReport) {
+    public SeenReportResponseDTO addSeenReport(@Validated(SeenReportRequestInfo.class) @RequestBody SeenReportRequestDTO seenReport) {
         return seenReportService.add(seenReport);
     }
 

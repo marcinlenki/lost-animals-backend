@@ -42,7 +42,7 @@ public abstract class MappedCrudService<T extends DatabaseEntity, U, D>
         var entity = repository
                 .findById(id)
                 .orElseThrow(() -> {
-                    var e = new IllegalArgumentException("Entity id mustn't be set!");
+                    var e = new EntityNotFoundException("Entity of id " + id + " not found!");
                     logger.error(e.getMessage(), e);
                     return e;
                 });
