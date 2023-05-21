@@ -10,5 +10,5 @@ public class UserRequestDTO {
     private String email;
     private String password;
 
-    private int roleId;
+    private int idRole;
 }

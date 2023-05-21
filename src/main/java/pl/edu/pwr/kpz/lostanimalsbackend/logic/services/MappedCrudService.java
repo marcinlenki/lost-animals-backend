@@ -53,6 +53,7 @@ public abstract class MappedCrudService<T extends DatabaseEntity, U, D>
     @Override
     public D add(U u) throws RuntimeException {
         var entity = mapper.convertDtoToFullEntity(u);
+        entity.setId(0);
         return mapper.convertEntityToDTO(repository.save(entity));
     }
 
@@ -65,6 +66,7 @@ public abstract class MappedCrudService<T extends DatabaseEntity, U, D>
         }
 
         var entity = mapper.convertDtoToFullEntity(u);
+        entity.setId(id);
         return mapper.convertEntityToDTO(repository.save(entity));
     }
 

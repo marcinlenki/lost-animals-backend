@@ -26,6 +26,7 @@ public class SeenReportService extends MappedCrudService<SeenReport, SeenReportR
     @Override
     public SeenReportResponseDTO add(SeenReportRequestDTO seenReportRequestDTO) throws RuntimeException {
         var entity = mapper.convertDtoToFullEntity(seenReportRequestDTO);
+        entity.setId(0);
 
         // save the animal
         var mappedAnimal = animalDTOMapper.convertDtoToFullEntity(seenReportRequestDTO.getAnimal());
