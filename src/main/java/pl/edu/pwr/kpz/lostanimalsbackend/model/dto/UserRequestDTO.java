@@ -15,5 +15,5 @@ public class UserRequestDTO {
     @Email(message = "User email wrong pattern")
     private String email;
     @Min(value = 1, message = "Role id must be over 0 in user")
-    private int roleId;
+    private int idRole;
 }
