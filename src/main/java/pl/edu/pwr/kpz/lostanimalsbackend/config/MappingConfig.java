@@ -4,8 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.UserRequestDTO;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.User;
 
 @Configuration
 public class MappingConfig {
@@ -15,8 +13,6 @@ public class MappingConfig {
         modelMapper
                 .getConfiguration().setAmbiguityIgnored(true)
                 .setMatchingStrategy(MatchingStrategies.STANDARD);
-        modelMapper.createTypeMap(UserRequestDTO.class, User.class)
-                .addMappings(mapping->mapping.skip(User::setId));
         return modelMapper;
     }
 }
