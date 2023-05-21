@@ -17,9 +17,8 @@ public class SeenReportRequestDTO {
     private Date lostDate;
     @NotNull(message = "Seen report coordinate shouldn't be null", groups = SeenReportRequestInfo.class)
     private Coordinate coordinate;
-    @NotNull(message = "Seen report description shouldn't be null", groups = SeenReportRequestInfo.class)
     private String description;
-    @Min(value = 1, groups = SeenReportRequestInfo.class, message = "Wrong user id in seen report")
+    @Min(value = 1, message = "User id must be over 0 in seen report", groups = SeenReportRequestInfo.class)
     private int userId;
     @Valid
     @NotNull(message = "Seen report animal shouldn't be null")
