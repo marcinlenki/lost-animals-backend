@@ -1,6 +1,5 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,21 +15,21 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-public class DatabaseEntity implements Identifiable {
+public class DatabaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
 
-    @Override
-    @JsonIgnore
-    public int getIdentity() {
-        return id;
-    }
-
-    @Override
-    public void setNewIdentity(int newIdentity) {
-        this.id = newIdentity;
-    }
+//    @Override
+//    @JsonIgnore
+//    public int getIdentity() {
+//        return id;
+//    }
+//
+//    @Override
+//    public void setNewIdentity(int newIdentity) {
+//        this.id = newIdentity;
+//    }
 
     @Override
     public boolean equals(Object o) {

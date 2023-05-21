@@ -4,11 +4,11 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.BaseRepository;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Identifiable;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.DatabaseEntity;
 
 @Transactional
 @RequiredArgsConstructor
-public abstract class AbstractCrudService<T extends Identifiable, U, D> implements CrudService<U, D> {
+public abstract class AbstractCrudService<T extends DatabaseEntity, U, D> implements CrudService<U, D> {
 
     protected final BaseRepository<T> repository;
 

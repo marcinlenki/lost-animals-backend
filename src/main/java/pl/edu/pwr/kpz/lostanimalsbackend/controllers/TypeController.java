@@ -8,6 +8,8 @@ import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Type;
 
 import java.util.List;
 
+// TODO should breed endpoint be nested?
+
 @RestController
 @RequestMapping("types")
 @RequiredArgsConstructor

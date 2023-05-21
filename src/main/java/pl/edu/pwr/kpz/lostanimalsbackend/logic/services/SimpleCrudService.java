@@ -3,12 +3,20 @@ package pl.edu.pwr.kpz.lostanimalsbackend.logic.services;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.BaseRepository;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Identifiable;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.DatabaseEntity;
 
 import java.util.List;
 import java.util.Map;
 
-public abstract class SimpleCrudService<T extends Identifiable> extends AbstractCrudService<T, T, T> {
+/**
+ * This is an abstract class for simple CRUD services.
+ * This class doesn't take care of mapping entities - it takes and returns the exact same object that is defined in
+ * {@link pl.edu.pwr.kpz.lostanimalsbackend.model.entities}  package.
+ * @param <T> the domain type the service manage. Extends {@link pl.edu.pwr.kpz.lostanimalsbackend.model.entities.DatabaseEntity} class.
+ */
+public abstract class SimpleCrudService<T extends DatabaseEntity>
+        extends AbstractCrudService<T, T, T>
+{
 
     public SimpleCrudService(BaseRepository<T> repository, Logger logger) {
         super(repository, logger);
@@ -32,7 +40,7 @@ public abstract class SimpleCrudService<T extends Identifiable> extends Abstract
 
     @Override
     public T add(T t) throws RuntimeException {
-        t.setNewIdentity(0);
+        t.setId(0);
         return repository.save(t);
     }
 
@@ -44,7 +52,7 @@ public abstract class SimpleCrudService<T extends Identifiable> extends Abstract
             throw e;
         }
 
-        t.setNewIdentity(id);
+        t.setId(id);
         return repository.save(t);
     }
 

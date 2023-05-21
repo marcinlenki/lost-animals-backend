@@ -7,6 +7,8 @@ import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Breed;
 
 import java.util.List;
 
+// TODO is this class necessary?
+
 @RestController
 @RequestMapping("breeds")
 @RequiredArgsConstructor

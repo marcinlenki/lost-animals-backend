@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @Builder
 public class User extends DatabaseEntity {
 //    @Id
@@ -38,17 +38,4 @@ public class User extends DatabaseEntity {
     @JsonIgnore
     @ToString.Exclude
     private List<Animal> animals;
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-//        User user = (User) o;
-//        return getId() != 0 && Objects.equals(getId(), user.getId());
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return getClass().hashCode();
-//    }
 }

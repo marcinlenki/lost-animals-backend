@@ -4,12 +4,23 @@ import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.BaseRepository;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.mapper.DTOMapper;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Identifiable;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.DatabaseEntity;
 
 import java.util.List;
 import java.util.Map;
 
-public abstract class MappedCrudService<T extends Identifiable, U, D> extends AbstractCrudService<T, U, D> {
+/**
+ * This is an abstract class for CRUD services which require DTO mapping.
+ * It uses {@link DTOMapper} to map requests and responses from given domain entity.
+ *
+ * @param <T> the domain type the service manage. Extends {@link pl.edu.pwr.kpz.lostanimalsbackend.model.entities.DatabaseEntity} class.
+ * @param <U> the request type which is mapped to the domain type.
+ * @param <D> the response type which is created from the domain type.
+ */
+public abstract class MappedCrudService<T extends DatabaseEntity, U, D>
+        extends AbstractCrudService<T, U, D>
+{
+
     protected final DTOMapper<T, U, D> mapper;
 
     public MappedCrudService(BaseRepository<T> repository, Logger logger, DTOMapper<T, U, D> mapper) {
