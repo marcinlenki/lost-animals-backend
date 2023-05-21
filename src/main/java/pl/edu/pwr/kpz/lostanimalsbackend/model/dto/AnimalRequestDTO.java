@@ -14,10 +14,10 @@ public class AnimalRequestDTO {
     @NotNull(message = "Animal sex shouldn't be null")
     private Sex sex;
 
-    @Min(value = 1, message = "Wrong owner id in animal")
+    @Min(value = 1, message = "Owner id must be over 0 in animal")
     private int ownerId;
-    @Min(value = 1, message = "Wrong animal color id in animal", groups = SeenReportRequestInfo.class)
+    @Min(value = 1, message = "Animal color id must be over 0 in animal", groups = SeenReportRequestInfo.class)
     private int animalColorId;
-    @Min(value = 1, message = "Wrong breed id in animal", groups = SeenReportRequestInfo.class)
+    @Min(value = 1, message = "Breed id must be over 0 in animal", groups = SeenReportRequestInfo.class)
     private int breedId;
 }

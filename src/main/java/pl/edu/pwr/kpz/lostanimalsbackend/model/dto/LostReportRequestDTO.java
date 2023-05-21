@@ -16,11 +16,10 @@ public class LostReportRequestDTO {
     private Date lostDate;
     @NotNull(message = "Lost report coordinate shouldn't be null")
     private Coordinate coordinate;
-    @NotNull(message = "Lost report description shouldn't be null")
     private String description;
 
-    @Min(value = 1, message = "Wrong animal id in lost report")
+    @Min(value = 1, message = "Animal id must be over 0 in lost report")
     private int animalId;
-    @Min(value = 1, message = "Wrong report status id in lost report")
+    @Min(value = 1, message = "Report status id must be over 0 in lost report")
     private int reportStatusId;
 }
