@@ -10,8 +10,8 @@ public class MappingConfig {
     @Bean
     public ModelMapper modelMapper(){
         ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setAmbiguityIgnored(true);
-        modelMapper.getConfiguration()
+        modelMapper
+                .getConfiguration().setAmbiguityIgnored(true)
                 .setMatchingStrategy(MatchingStrategies.STANDARD);
         return modelMapper;
     }
