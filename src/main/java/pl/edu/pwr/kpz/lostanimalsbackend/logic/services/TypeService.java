@@ -1,47 +1,33 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.logic.services;
 
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
+import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.TypeRepository;
+import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.BaseRepository;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Breed;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Type;
 
 import java.util.List;
 
 @Service
-@Transactional
-@RequiredArgsConstructor
-public class TypeService {
-    private final TypeRepository typeRepository;
+public class TypeService extends SimpleCrudService<Type> {
+    private final BreedService breedService;
 
-    public List<Type> getTypeList(){
-        return this.typeRepository.findAll();
+    public TypeService(BaseRepository<Type> repository, BreedService breedService) {
+        super(repository, LoggerFactory.getLogger(TypeService.class));
+        this.breedService = breedService;
     }
 
-    public Type getTypeById(Integer id){
-        return this.typeRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "type with id: " + id + " dose not exists"
-                ));
+    public List<Breed> getBreedsOfType(int typeId) {
+        if (!repository.existsById(typeId))
+            throw new EntityNotFoundException();
+
+        return breedService.getBreedsByTypeId(typeId);
     }
 
-    public void addType(Type type){
-        typeRepository.save(type);
-    }
-
-    public void deleteTypeById(Integer id){
-        boolean exists = typeRepository.existsById(id);
-        if(!exists){
-            throw new IllegalStateException("type with id:" + id + " dose not exists");
-        }
-        this.typeRepository.deleteById(id);
-    }
-
-    public void updateType(Integer id, Type type){
-        boolean exists = typeRepository.existsById(id);
-        if(!exists){
-            throw new IllegalStateException("type with id:" + id + " dose not exists");
-        }
-        this.typeRepository.save(type);
+    public Breed addNewBreedOfType(int typeId, Breed breed) throws RuntimeException {
+        var type = getOne(typeId);
+        breed.setType(type);
+        return breedService.add(breed);
     }
 }

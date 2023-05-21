@@ -124,11 +124,10 @@ public class PictureService {
 
             AnimalPicture animalPicture =
                     AnimalPicture.builder()
-                            .animal(Animal.builder().id(animalId).build())
+                            .animal(new Animal(animalId))
                             .contentType(multipartFile.getContentType())
                             .url(objectUrl)
                             .build();
-
 
             PutObjectRequest putObjectRequest = new PutObjectRequest(s3BucketName, generatedFilename, file);
 

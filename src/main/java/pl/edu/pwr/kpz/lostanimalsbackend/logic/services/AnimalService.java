@@ -1,11 +1,12 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.logic.services;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.AnimalRepository;
+import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.BaseRepository;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalRequestDTO;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.AnimalResponseDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.mapper.AnimalDTOMapper;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Animal;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.AnimalPicture;
@@ -14,49 +15,21 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-@Transactional
-@RequiredArgsConstructor
-public class AnimalService {
+public class AnimalService extends MappedCrudService<Animal, AnimalRequestDTO, AnimalResponseDTO> {
 
     private final PictureService pictureService;
 
-    private final AnimalRepository animalRepository;
-    private final AnimalDTOMapper animalDTOMapper;
-
-    public List<Animal> getAnimalList(){
-        return this.animalRepository.findAll();
+    public AnimalService(BaseRepository<Animal> repository, AnimalDTOMapper mapper, PictureService pictureService) {
+        super(repository, LoggerFactory.getLogger(AnimalService.class), mapper);
+        this.pictureService = pictureService;
     }
 
-    public Animal getAnimalById(Integer id){
-        return this.animalRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "animal with id: " + id + " dose not exists"
-                ));
-    }
-
-    public Animal addAnimal(Animal animal){
-        return animalRepository.save(animal);
-    }
-
-    public void deleteAnimalById(Integer id){
-        boolean exists = animalRepository.existsById(id);
-        if(!exists){
-            throw new IllegalStateException("animal with id:" + id + " dose not exists");
-        }
-        this.animalRepository.deleteById(id);
-    }
-
-    public void updateAnimal(Integer id, Animal animal){
-        boolean exists = animalRepository.existsById(id);
-
-        if(!exists) {
-            throw new IllegalStateException("animal with id:" + id + " dose not exists");
-        }
-        this.animalRepository.save(animal);
+    protected Animal addSimple(Animal animal) {
+        return repository.save(animal);
     }
 
     public List<AnimalPicture> getAnimalPictures(int animalId) {
-        if (!animalRepository.existsById(animalId))
+        if (!repository.existsById(animalId))
             throw new EntityNotFoundException();
 
         return pictureService.getPicturesByAnimalId(animalId);
@@ -64,7 +37,7 @@ public class AnimalService {
 
 
     public Object uploadAnimalPictures(MultipartFile[] files, int animalId) throws RuntimeException {
-        if (!animalRepository.existsById(animalId))
+        if (!repository.existsById(animalId))
             throw new EntityNotFoundException();
 
         else if (files == null || files.length == 0) {
@@ -76,7 +49,7 @@ public class AnimalService {
 
 
     public void deleteAnimalPicture(int animalId, int pictureId) {
-        if (!animalRepository.existsById(animalId))
+        if (!repository.existsById(animalId))
             throw new EntityNotFoundException();
 
 
@@ -84,7 +57,7 @@ public class AnimalService {
     }
 
     public void deleteAnimalPictures(int animalId, String ids) throws RuntimeException {
-        if (!animalRepository.existsById(animalId))
+        if (!repository.existsById(animalId))
             throw new EntityNotFoundException();
 
         // If one of the passed id is unparsable to int, NumberFormatException will be thrown

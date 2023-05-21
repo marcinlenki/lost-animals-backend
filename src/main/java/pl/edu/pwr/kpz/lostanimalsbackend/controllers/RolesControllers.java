@@ -14,27 +14,27 @@ public class RolesControllers {
     private final RoleService roleService;
 
     @GetMapping
-    public List<Role> getReportStatusList(){
-        return this.roleService.getRoleList();
+    public List<Role> getRoleList() {
+        return roleService.list();
     }
 
-    @GetMapping(path = "/{id}")
-    public Role getReportStatusById(@PathVariable("id") Integer id){
-        return this.roleService.getRoleById(id);
+    @GetMapping("{id}")
+    public Role getRoleById(@PathVariable("id") int id) {
+        return roleService.getOne(id);
     }
 
     @PostMapping
-    public void addReportStatus(@RequestBody Role reportStatus){
-        roleService.addRole(reportStatus);
+    public Role addRole(@RequestBody Role role) {
+        return roleService.add(role);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteReportStatusById(@PathVariable("id") Integer id){
-        roleService.deleteRoleById(id);
+    @PutMapping("{id}")
+    public Role updateRole(@PathVariable("id") int id, @RequestBody Role role) {
+        return roleService.update(id, role);
     }
 
-    @PutMapping(path = "/{id}")
-    public void updateReportStatus(@PathVariable("id") Integer id, @RequestBody Role reportStatus){
-        roleService.updateRole(id, reportStatus);
+    @DeleteMapping("{id}")
+    public void deleteRoleById(@PathVariable("id") int id) {
+        roleService.delete(id);
     }
 }

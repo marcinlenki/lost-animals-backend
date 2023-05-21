@@ -7,35 +7,35 @@ import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Breed;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("breeds")
 @RequiredArgsConstructor
 public class BreedController {
-
     private final BreedService breedService;
 
     @GetMapping
-    public List<Breed> getBreedList(){
-        return this.breedService.getBreedList();
+    public List<Breed> getBreedList() {
+        return breedService.list();
     }
 
-    @GetMapping(path = "/{id}")
-    public Breed getBreedById(@PathVariable("id") Integer id){
-        return this.breedService.getBreedById(id);
+    @GetMapping("{id}")
+    public Breed getBreedById(@PathVariable("id") int id) {
+        return breedService.getOne(id);
     }
 
     @PostMapping
-    public void addBreed(@RequestBody Breed breed){
-        breedService.addBreed(breed);
+    public Breed addBreed(@RequestBody Breed breed) {
+        return breedService.add(breed);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteBreedById(@PathVariable("id") Integer id){
-        breedService.deleteBreedById(id);
+    @PutMapping("{id}")
+    public Breed updateBreed(@PathVariable("id") int id, @RequestBody Breed breed) {
+        return breedService.update(id, breed);
     }
 
-    @PutMapping(path = "/{id}")
-    public void updateBreed(@PathVariable("id") Integer id, @RequestBody Breed breed){
-        breedService.updateBreed(id, breed);
+    @DeleteMapping("{id}")
+    public void deleteBreedById(@PathVariable("id") int id) {
+        breedService.delete(id);
     }
 }

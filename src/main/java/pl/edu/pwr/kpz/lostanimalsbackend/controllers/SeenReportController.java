@@ -1,9 +1,12 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.SeenReportService;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.SeenReport;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.SeenReportRequestDTO;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.SeenReportRequestInfo;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.SeenReportResponseDTO;
 
 import java.util.List;
 
@@ -14,27 +17,27 @@ public class SeenReportController {
     private final SeenReportService seenReportService;
 
     @GetMapping
-    public List<SeenReport> getSeenReportList(){
-        return this.seenReportService.getSeenReportList();
+    public List<SeenReportResponseDTO> getSeenReportList() {
+        return seenReportService.list();
     }
 
-    @GetMapping(path = "/{id}")
-    public SeenReport getSeenReportById(@PathVariable("id") Integer id){
-        return this.seenReportService.getSeenReportById(id);
+    @GetMapping("{id}")
+    public SeenReportResponseDTO getSeenReportById(@PathVariable("id") int id) {
+        return seenReportService.getOne(id);
     }
 
     @PostMapping
-    public void addSeenReport(@RequestBody SeenReport seenReport){
-        seenReportService.addSeenReport(seenReport);
+    public SeenReportResponseDTO addSeenReport(@Validated(SeenReportRequestInfo.class) @RequestBody SeenReportRequestDTO seenReport) {
+        return seenReportService.add(seenReport);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteSeenReportById(@PathVariable("id") Integer id){
-        seenReportService.deleteSeenReportById(id);
+    @PutMapping("{id}")
+    public void updateSeenReport(@PathVariable("id") int id, @RequestBody SeenReportRequestDTO seenReport) {
+        seenReportService.update(id, seenReport);
     }
 
-    @PutMapping(path = "/{id}")
-    public void updateSeenReport(@PathVariable("id") Integer id, @RequestBody SeenReport seenReport){
-        seenReportService.updateSeenReport(id, seenReport);
+    @DeleteMapping("{id}")
+    public void deleteSeenReportById(@PathVariable("id") int id){
+        seenReportService.delete(id);
     }
 }
