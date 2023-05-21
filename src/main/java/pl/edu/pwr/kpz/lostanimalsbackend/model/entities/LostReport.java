@@ -2,10 +2,8 @@ package pl.edu.pwr.kpz.lostanimalsbackend.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import java.util.Date;
-import java.util.Objects;
 
 @Table(name = "lost_report", schema = "public", catalog = "lost_animals")
 @Entity
@@ -15,10 +13,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @Builder
-public class LostReport {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class LostReport extends DatabaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "animal_id", referencedColumnName = "id")
@@ -36,16 +31,4 @@ public class LostReport {
     @Embedded
     private Coordinate coordinate;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        LostReport that = (LostReport) o;
-        return getId() != 0 && Objects.equals(getId(), that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

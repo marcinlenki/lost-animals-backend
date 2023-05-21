@@ -3,10 +3,8 @@ package pl.edu.pwr.kpz.lostanimalsbackend.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import java.util.List;
-import java.util.Objects;
 
 @Table(name = "user", schema = "public", catalog = "lost_animals")
 @Entity
@@ -16,10 +14,10 @@ import java.util.Objects;
 @Setter
 @ToString
 @Builder
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class User extends DatabaseEntity {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
 
     private String name;
 
@@ -41,16 +39,16 @@ public class User {
     @ToString.Exclude
     private List<Animal> animals;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
-        return getId() != 0 && Objects.equals(getId(), user.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+//        User user = (User) o;
+//        return getId() != 0 && Objects.equals(getId(), user.getId());
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return getClass().hashCode();
+//    }
 }

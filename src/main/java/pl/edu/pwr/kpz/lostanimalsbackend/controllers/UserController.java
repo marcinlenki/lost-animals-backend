@@ -3,7 +3,8 @@ package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.UserService;
-import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.User;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.UserRequestDTO;
+import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.UserResponseDTO;
 
 import java.util.List;
 
@@ -15,28 +16,27 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<User> getUserList(){
-        return this.userService.getUserList();
+    public List<UserResponseDTO> getUserList(){
+        return userService.list();
     }
 
-    @GetMapping(path = "/{id}")
-    public User getUserById(@PathVariable("id") Integer id){
-        return this.userService.getUserById(id);
+    @GetMapping("{id}")
+    public UserResponseDTO getUserById(@PathVariable("id") int id) {
+        return userService.getOne(id);
     }
 
     @PostMapping
-    public void addUser(@RequestBody User user){
-        userService.addUser(user);
+    public UserResponseDTO addUser(@RequestBody UserRequestDTO user) {
+        return userService.add(user);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteUserById(@PathVariable("id") Integer id){
-        userService.deleteUserById(id);
+    @PutMapping("{id}")
+    public UserResponseDTO updateUser(@PathVariable("id") int id, @RequestBody UserRequestDTO user) {
+        return userService.update(id, user);
     }
 
-    @PutMapping(path = "/{id}")
-    public void updateUser(@PathVariable("id") Integer id, @RequestBody User user){
-        userService.updateUser(id, user);
+    @DeleteMapping("{id}")
+    public void deleteUserById(@PathVariable("id") int id) {
+        userService.delete(id);
     }
-
 }

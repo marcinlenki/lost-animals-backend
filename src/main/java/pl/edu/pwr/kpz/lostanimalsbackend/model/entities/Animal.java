@@ -1,13 +1,10 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.NaturalId;
 
 import java.util.List;
-import java.util.Objects;
 
 @Table(name = "animal", schema = "public", catalog = "lost_animals")
 @Entity
@@ -17,12 +14,15 @@ import java.util.Objects;
 @Setter
 @ToString
 @Builder
-public class Animal {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Animal extends DatabaseEntity {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
 
-    @JsonManagedReference
+    public Animal(int id) {
+        super(id);
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
@@ -47,16 +47,16 @@ public class Animal {
     @ToString.Exclude
     private List<AnimalPicture> animalPictures;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Animal animal = (Animal) o;
-        return getId() != 0 && Objects.equals(getId(), animal.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+//        Animal animal = (Animal) o;
+//        return getId() != 0 && Objects.equals(getId(), animal.getId());
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return getClass().hashCode();
+//    }
 }
