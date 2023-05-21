@@ -8,7 +8,6 @@ import java.util.Date;
 @Data
 public class SeenReportResponseDTO {
     private int id;
-//    private UserResponseDTO user; //id imie nazwisko tele
     private int userId;
     private String userName;
     private String userLastName;

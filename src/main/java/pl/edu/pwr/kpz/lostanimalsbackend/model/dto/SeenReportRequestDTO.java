@@ -34,6 +34,7 @@ public class SeenReportRequestDTO {
 
     // at least one of animal info (animalId, animal) must bre present
     @JsonIgnore
+    @SuppressWarnings("unused") // used during validation
     @AssertTrue(message = "You must include some animal information!", groups = SeenReportRequestInfo.class)
     public boolean isValid() {
         return Objects.nonNull(animalId) || Objects.nonNull(animal);
