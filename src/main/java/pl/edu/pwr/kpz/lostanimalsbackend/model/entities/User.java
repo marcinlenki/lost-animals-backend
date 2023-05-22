@@ -3,10 +3,8 @@ package pl.edu.pwr.kpz.lostanimalsbackend.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import java.util.List;
-import java.util.Objects;
 
 @Table(name = "user", schema = "public", catalog = "lost_animals")
 @Entity
@@ -14,12 +12,9 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @Builder
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class User extends DatabaseEntity {
 
     private String name;
 
@@ -29,23 +24,15 @@ public class User {
 
     private String email;
 
+    @JsonIgnore
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
 
     @OneToMany(mappedBy = "owner")
     @JsonIgnore
     @ToString.Exclude
     private List<Animal> animals;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
-        return getId() != 0 && Objects.equals(getId(), user.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

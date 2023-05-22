@@ -15,27 +15,27 @@ public class ReportStatusController {
     private final ReportStatusService reportStatusService;
 
     @GetMapping
-    public List<ReportStatus> getReportStatusList(){
-        return this.reportStatusService.getReportStatusList();
+    public List<ReportStatus> getReportStatusList() {
+        return this.reportStatusService.list();
     }
 
-    @GetMapping(path = "/{id}")
-    public ReportStatus getReportStatusById(@PathVariable("id") Integer id){
-        return this.reportStatusService.getReportStatusById(id);
+    @GetMapping("{id}")
+    public ReportStatus getReportStatusById(@PathVariable("id") int id) {
+        return this.reportStatusService.getOne(id);
     }
 
     @PostMapping
-    public void addReportStatus(@RequestBody ReportStatus reportStatus){
-        reportStatusService.addReportStatus(reportStatus);
+    public void addReportStatus(@RequestBody ReportStatus reportStatus) {
+        reportStatusService.add(reportStatus);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteReportStatusById(@PathVariable("id") Integer id){
-        reportStatusService.deleteReportStatusById(id);
+    @PutMapping( "{id}")
+    public void updateReportStatus(@PathVariable("id") int id, @RequestBody ReportStatus reportStatus) {
+        reportStatusService.update(id, reportStatus);
     }
 
-    @PutMapping(path = "/{id}")
-    public void updateReportStatus(@PathVariable("id") Integer id, @RequestBody ReportStatus reportStatus){
-        reportStatusService.updateReportStatus(id, reportStatus);
+    @DeleteMapping( "{id}")
+    public void deleteReportStatusById(@PathVariable("id") int id) {
+        reportStatusService.delete(id);
     }
 }

@@ -14,27 +14,27 @@ public class AnimalColorController {
     private final AnimalColorService animalColorService;
 
     @GetMapping
-    public List<AnimalColor> getAnimalColorList(){
-        return this.animalColorService.getAnimalColorList();
+    public List<AnimalColor> getAnimalColorList() {
+        return animalColorService.list();
     }
 
-    @GetMapping(path = "/{id}")
-    public AnimalColor getAnimalColorById(@PathVariable("id") Integer id){
-        return this.animalColorService.getAnimalColorById(id);
+    @GetMapping("{id}")
+    public AnimalColor getAnimalColorById(@PathVariable("id") int id) {
+        return animalColorService.getOne(id);
     }
 
     @PostMapping
-    public void addAnimalColor(@RequestBody AnimalColor animalColor){
-        animalColorService.addAnimalColor(animalColor);
+    public AnimalColor addAnimalColor(@RequestBody AnimalColor animalColor) {
+        return animalColorService.add(animalColor);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteAnimalColorById(@PathVariable("id") Integer id){
-        animalColorService.deleteAnimalColorById(id);
+    @PutMapping("{id}")
+    public AnimalColor updateAnimalColor(@PathVariable("id") int id, @RequestBody AnimalColor animalColor) {
+        return animalColorService.update(id, animalColor);
     }
 
-    @PutMapping(path = "/{id}")
-    public void updateAnimalColor(@PathVariable("id") Integer id, @RequestBody AnimalColor animalColor){
-        animalColorService.updateAnimalColor(id, animalColor);
+    @DeleteMapping("{id}")
+    public void deleteAnimalColorById(@PathVariable("id") int id) {
+        animalColorService.delete(id);
     }
 }

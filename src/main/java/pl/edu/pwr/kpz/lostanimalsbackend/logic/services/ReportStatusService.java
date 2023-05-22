@@ -1,48 +1,15 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.logic.services;
 
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.ReportStatusRepository;
+import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.BaseRepository;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.ReportStatus;
 
-import java.util.List;
-
 @Service
-@Transactional
-@RequiredArgsConstructor
-public class ReportStatusService {
+public class ReportStatusService extends SimpleCrudService<ReportStatus> {
 
-    private final ReportStatusRepository reportStatusRepository;
-
-    public List<ReportStatus> getReportStatusList(){
-        return this.reportStatusRepository.findAll();
+    public ReportStatusService(BaseRepository<ReportStatus> repository) {
+        super(repository, LoggerFactory.getLogger(ReportStatusService.class));
     }
 
-    public ReportStatus getReportStatusById(Integer id){
-        return this.reportStatusRepository.findById(id)
-                .orElseThrow(()-> new IllegalStateException(
-                        "report status with id: " + id + " dose not exists"
-                ));
-    }
-
-    public void addReportStatus(ReportStatus reportStatus){
-        reportStatusRepository.save(reportStatus);
-    }
-
-    public void deleteReportStatusById(Integer id){
-        boolean exists = reportStatusRepository.existsById(id);
-        if(!exists){
-            throw new IllegalStateException("report status with id:" + id + " dose not exists");
-        }
-        this.reportStatusRepository.deleteById(id);
-    }
-
-    public void updateReportStatus(Integer id, ReportStatus reportStatus){
-        boolean exists = reportStatusRepository.existsById(id);
-        if(!exists){
-            throw new IllegalStateException("report status with id:" + id + " dose not exists");
-        }
-        this.reportStatusRepository.save(reportStatus);
-    }
 }

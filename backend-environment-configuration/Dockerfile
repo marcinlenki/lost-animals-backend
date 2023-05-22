@@ -1,3 +1,5 @@
+# Builds and configures Cloud Beaver image
+
 FROM dbeaver/cloudbeaver:latest
 ENV con_conf_path=.data-sources.json
 ENV admin_conf_path=.cloudbeaver.auto.conf

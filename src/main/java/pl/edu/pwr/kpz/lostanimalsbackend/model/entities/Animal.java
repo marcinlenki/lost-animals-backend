@@ -1,12 +1,10 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.NaturalId;
 
-import java.util.Objects;
+import java.util.List;
 
 @Table(name = "animal", schema = "public", catalog = "lost_animals")
 @Entity
@@ -14,14 +12,14 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @Builder
-public class Animal {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Animal extends DatabaseEntity {
 
-    @JsonManagedReference
+    public Animal(int id) {
+        super(id);
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
@@ -39,16 +37,11 @@ public class Animal {
     @JoinColumn(name = "animal_color_id", referencedColumnName = "id")
     private AnimalColor color;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Animal animal = (Animal) o;
-        return getId() != 0 && Objects.equals(getId(), animal.getId());
-    }
+    @Enumerated(EnumType.STRING)
+    private Sex sex;
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+    @OneToMany(mappedBy = "animal")
+    @ToString.Exclude
+    private List<AnimalPicture> animalPictures;
+
 }

@@ -2,10 +2,8 @@ package pl.edu.pwr.kpz.lostanimalsbackend.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import java.util.Date;
-import java.util.Objects;
 
 @Table(name = "lost_report", schema = "public", catalog = "lost_animals")
 @Entity
@@ -13,12 +11,9 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @Builder
-public class LostReport {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class LostReport extends DatabaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "animal_id", referencedColumnName = "id")
@@ -28,25 +23,12 @@ public class LostReport {
     @JoinColumn(name = "report_status_id", referencedColumnName = "id")
     private ReportStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "coordinates_id", referencedColumnName = "id")
-    private Coordinates coordinates;
-
     @Column(name = "date")
     private Date lostDate;
 
     private String description;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        LostReport that = (LostReport) o;
-        return getId() != 0 && Objects.equals(getId(), that.getId());
-    }
+    @Embedded
+    private Coordinate coordinate;
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
