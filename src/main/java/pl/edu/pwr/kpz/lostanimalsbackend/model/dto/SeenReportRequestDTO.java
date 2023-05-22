@@ -19,6 +19,7 @@ public class SeenReportRequestDTO {
     @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date lostDate;
     @NotNull(message = "Seen report coordinate shouldn't be null", groups = SeenReportRequestInfo.class)
+    @Valid
     private Coordinate coordinate;
     private String description;
     @Min(value = 1, message = "User id must be over 0 in seen report", groups = SeenReportRequestInfo.class)

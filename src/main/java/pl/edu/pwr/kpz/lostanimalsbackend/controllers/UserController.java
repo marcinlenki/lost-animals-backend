@@ -1,5 +1,6 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.UserService;
@@ -26,12 +27,12 @@ public class UserController {
     }
 
     @PostMapping
-    public UserResponseDTO addUser(@RequestBody UserRequestDTO user) {
+    public UserResponseDTO addUser(@Valid @RequestBody UserRequestDTO user) {
         return userService.add(user);
     }
 
     @PutMapping("{id}")
-    public UserResponseDTO updateUser(@PathVariable("id") int id, @RequestBody UserRequestDTO user) {
+    public UserResponseDTO updateUser(@Valid @PathVariable("id") int id, @RequestBody UserRequestDTO user) {
         return userService.update(id, user);
     }
 

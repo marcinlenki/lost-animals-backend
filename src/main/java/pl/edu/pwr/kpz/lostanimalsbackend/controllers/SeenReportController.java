@@ -32,7 +32,7 @@ public class SeenReportController {
     }
 
     @PutMapping("{id}")
-    public void updateSeenReport(@PathVariable("id") int id, @RequestBody SeenReportRequestDTO seenReport) {
+    public void updateSeenReport(@Validated(SeenReportRequestInfo.class) @PathVariable("id") int id, @RequestBody SeenReportRequestDTO seenReport) {
         seenReportService.update(id, seenReport);
     }
 
