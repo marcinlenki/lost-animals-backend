@@ -57,6 +57,8 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/lost_animals
       - SPRING_DATASOURCE_USER=kpz-dev
       - SPRING_DATASOURCE_PASSWORD=kpz
+    env_file:
+      - .env
     profiles:
       - frontend
 
