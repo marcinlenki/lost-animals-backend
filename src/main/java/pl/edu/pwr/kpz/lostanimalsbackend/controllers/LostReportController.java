@@ -1,5 +1,6 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.LostReportService;
@@ -26,12 +27,12 @@ public class LostReportController {
     }
 
     @PostMapping
-    public LostReportResponseDTO addLostReport(@RequestBody LostReportRequestDTO lostReport) {
+    public LostReportResponseDTO addLostReport(@Valid @RequestBody LostReportRequestDTO lostReport) {
         return lostReportService.add(lostReport);
     }
 
     @PutMapping("{id}")
-    public LostReportResponseDTO updateLostReport(@PathVariable("id") int id, @RequestBody LostReportRequestDTO lostReport) {
+    public LostReportResponseDTO updateLostReport(@Valid @PathVariable("id") int id, @RequestBody LostReportRequestDTO lostReport) {
         return lostReportService.update(id, lostReport);
     }
 

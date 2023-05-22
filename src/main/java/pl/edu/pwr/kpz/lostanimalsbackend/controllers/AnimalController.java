@@ -1,5 +1,6 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,12 +28,12 @@ public class AnimalController {
     }
 
     @PostMapping
-    public AnimalResponseDTO addAnimal(@RequestBody AnimalRequestDTO animal) {
+    public AnimalResponseDTO addAnimal(@Valid @RequestBody AnimalRequestDTO animal) {
         return animalService.add(animal);
     }
 
     @PutMapping("{id}")
-    public AnimalResponseDTO updateAnimal(@PathVariable("id") int id, @RequestBody AnimalRequestDTO animal) {
+    public AnimalResponseDTO updateAnimal(@Valid @PathVariable("id") int id, @RequestBody AnimalRequestDTO animal) {
         return animalService.update(id, animal);
     }
 

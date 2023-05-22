@@ -1,5 +1,6 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.model.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -15,6 +16,7 @@ public class LostReportRequestDTO {
     @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date lostDate;
     @NotNull(message = "Lost report coordinate shouldn't be null")
+    @Valid
     private Coordinate coordinate;
     private String description;
 
