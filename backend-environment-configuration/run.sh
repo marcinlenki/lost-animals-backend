@@ -33,3 +33,4 @@ docker-compose --profile "${docker_profile}" rm -f &&
 docker rmi -f marcinlenki/kpz-backend:latest 2> /dev/null || true &&
 docker-compose --profile "${docker_profile}" up -d &&
 echo "Finished container initialization..."
+
