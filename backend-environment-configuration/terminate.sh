@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script can be used to shut down the application whole stack.
+# This script can be used to shut down the applications whole stack.
 # Its main purpose is to be used as linux service ExecStop script.
 
 if ! docker info > /dev/null 2>&1; then
