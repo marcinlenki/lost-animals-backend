@@ -1,14 +1,14 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.SeenReportService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.SeenReportRequestDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.SeenReportRequestInfo;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.SeenReportResponseDTO;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("seen")
@@ -17,8 +17,8 @@ public class SeenReportController {
     private final SeenReportService seenReportService;
 
     @GetMapping
-    public List<SeenReportResponseDTO> getSeenReportList() {
-        return seenReportService.list();
+    public Page<SeenReportResponseDTO> getSeenReportList(Pageable pageable) {
+        return seenReportService.list(pageable);
     }
 
     @GetMapping("{id}")

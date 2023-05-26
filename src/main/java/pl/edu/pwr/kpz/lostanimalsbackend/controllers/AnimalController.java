@@ -2,6 +2,8 @@ package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.AnimalService;
@@ -18,8 +20,8 @@ public class AnimalController {
     private final AnimalService animalService;
 
     @GetMapping
-    public List<AnimalResponseDTO> getAnimalList() {
-        return animalService.list();
+    public Page<AnimalResponseDTO> getAnimalList(Pageable pageable) {
+        return animalService.list(pageable);
     }
 
     @GetMapping("{id}")

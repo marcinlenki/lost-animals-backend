@@ -2,6 +2,9 @@ package pl.edu.pwr.kpz.lostanimalsbackend.logic.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.BaseRepository;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.mapper.DTOMapper;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.DatabaseEntity;
@@ -23,18 +26,21 @@ public abstract class MappedCrudService<T extends DatabaseEntity, U, D>
 
     protected final DTOMapper<T, U, D> mapper;
 
-    public MappedCrudService(BaseRepository<T> repository, Logger logger, DTOMapper<T, U, D> mapper) {
+    protected MappedCrudService(BaseRepository<T> repository, Logger logger, DTOMapper<T, U, D> mapper) {
         super(repository, logger);
         this.mapper = mapper;
     }
 
 
     @Override
-    public List<D> list(Map<String, String> params) {
-        return repository.findAll()
-                .stream()
+    public Page<D> list(Map<String, String> params, Pageable pageable) {
+        Page<T> entityPage = repository.findAll(pageable);
+
+        List<D> dtoList = entityPage.getContent().stream()
                 .map(mapper::convertEntityToDTO)
                 .toList();
+
+        return new PageImpl<>(dtoList, pageable, entityPage.getTotalElements());
     }
 
     @Override

@@ -1,11 +1,11 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.AnimalColorService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.AnimalColor;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("animal-colors")
@@ -14,8 +14,8 @@ public class AnimalColorController {
     private final AnimalColorService animalColorService;
 
     @GetMapping
-    public List<AnimalColor> getAnimalColorList() {
-        return animalColorService.list();
+    public Page<AnimalColor> getAnimalColorList(Pageable pageable) {
+        return animalColorService.list(pageable);
     }
 
     @GetMapping("{id}")

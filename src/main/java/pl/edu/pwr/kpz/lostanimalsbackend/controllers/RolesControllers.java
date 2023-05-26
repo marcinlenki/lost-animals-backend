@@ -1,11 +1,11 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.RoleService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Role;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("roles")
@@ -14,8 +14,8 @@ public class RolesControllers {
     private final RoleService roleService;
 
     @GetMapping
-    public List<Role> getRoleList() {
-        return roleService.list();
+    public Page<Role> getRoleList(Pageable pageable) {
+        return roleService.list(pageable);
     }
 
     @GetMapping("{id}")

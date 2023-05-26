@@ -1,11 +1,11 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.BreedService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Breed;
-
-import java.util.List;
 
 
 @RestController
@@ -15,8 +15,8 @@ public class BreedController {
     private final BreedService breedService;
 
     @GetMapping
-    public List<Breed> getBreedList() {
-        return breedService.list();
+    public Page<Breed> getBreedList(Pageable pageable) {
+        return breedService.list(pageable);
     }
 
     @GetMapping("{id}")
