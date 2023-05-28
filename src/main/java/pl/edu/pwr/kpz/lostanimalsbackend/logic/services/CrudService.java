@@ -1,10 +1,11 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.logic.services;
 
 import jakarta.validation.constraints.Min;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,10 +15,10 @@ import java.util.Map;
  */
 @Validated
 public interface CrudService <U, D> {
-    List<D> list(Map<String, String> params);
+    Page<D> list(Map<String, String> params, Pageable pageable);
 
-    default List<D> list() {
-        return list(Collections.emptyMap());
+    default Page<D> list(Pageable pageable) {
+        return list(Collections.emptyMap(), pageable);
     }
 
     D getOne(int id) throws RuntimeException;

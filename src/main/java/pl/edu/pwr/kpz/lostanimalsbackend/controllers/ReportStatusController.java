@@ -1,11 +1,11 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.ReportStatusService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.ReportStatus;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("report-statuses")
@@ -15,8 +15,8 @@ public class ReportStatusController {
     private final ReportStatusService reportStatusService;
 
     @GetMapping
-    public List<ReportStatus> getReportStatusList() {
-        return this.reportStatusService.list();
+    public Page<ReportStatus> getReportStatusList(Pageable pageable) {
+        return this.reportStatusService.list(pageable);
     }
 
     @GetMapping("{id}")

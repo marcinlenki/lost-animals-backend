@@ -2,10 +2,11 @@ package pl.edu.pwr.kpz.lostanimalsbackend.logic.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.repositories.BaseRepository;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.DatabaseEntity;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,13 +19,13 @@ public abstract class SimpleCrudService<T extends DatabaseEntity>
         extends AbstractCrudService<T, T, T>
 {
 
-    public SimpleCrudService(BaseRepository<T> repository, Logger logger) {
+    protected SimpleCrudService(BaseRepository<T> repository, Logger logger) {
         super(repository, logger);
     }
 
     @Override
-    public List<T> list(Map<String, String> params) {
-        return repository.findAll();
+    public Page<T> list(Map<String, String> params, Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override

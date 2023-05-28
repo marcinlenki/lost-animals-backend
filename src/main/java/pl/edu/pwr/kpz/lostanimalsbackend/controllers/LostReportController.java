@@ -2,12 +2,12 @@ package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.LostReportService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.LostReportRequestDTO;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.dto.LostReportResponseDTO;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("lost")
@@ -17,8 +17,8 @@ public class LostReportController {
     private final LostReportService lostReportService;
 
     @GetMapping
-    public List<LostReportResponseDTO> getLostReportList(){
-        return lostReportService.list();
+    public Page<LostReportResponseDTO> getLostReportList(Pageable pageable){
+        return lostReportService.list(pageable);
     }
 
     @GetMapping("{id}")

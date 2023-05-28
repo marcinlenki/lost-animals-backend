@@ -1,6 +1,8 @@
 package pl.edu.pwr.kpz.lostanimalsbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.kpz.lostanimalsbackend.logic.services.TypeService;
 import pl.edu.pwr.kpz.lostanimalsbackend.model.entities.Breed;
@@ -16,8 +18,8 @@ public class TypeController {
     private final TypeService typeService;
 
     @GetMapping
-    public List<Type> getTypeList() {
-        return typeService.list();
+    public Page<Type> getTypeList(Pageable pageable) {
+        return typeService.list(pageable);
     }
 
     @GetMapping("{id}")
