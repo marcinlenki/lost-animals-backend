@@ -2,6 +2,7 @@
 
 env_file=".env"
 compose_file="docker-compose-arm.yml"
+mvn="../mvnw" # use maven wrapper
 
 if ! docker info > /dev/null 2>&1; then
   echo "ERROR: Docker isn't running, please start Docker and try again! Exiting..."
@@ -31,13 +32,13 @@ fi
 
 
 if ! compgen -G "../target/*.jar" > /dev/null; then
-    echo "Building Spring Boot Application..." 
-    if ! mvn -B package --file ../pom.xml -DskipTests >> /dev/null; then
+    echo "Building Spring Boot Application..."
+
+    if ! eval "$mvn -B package --file ../pom.xml -DskipTests > /dev/null"; then
       echo "Unable to build Spring project. Exiting..."
       exit 1
     fi
 fi
-
 
 docker-compose --profile "${docker_profile}" -f "$compose_file" stop &&
 docker-compose --profile "${docker_profile}" -f "$compose_file" rm -f &&
