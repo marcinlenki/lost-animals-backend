@@ -1,15 +1,22 @@
 # Lost Animals Backend 
 
 ## API Documentation
-Api docs coming soon. <br>
+Api docs coming soon. Temporary Swagger Docs are available after launching the application 
+at `/swagger-ui/index.html#/` endpoint.
 
 ## Application Setup
 ### TL;DR
 After Installing Docker Desktop run:
-
+- For **x64** architecture
 ```shell
 cd backend-environment-configuration
 bash run.sh
+```
+
+- For **arm** architecture
+```shell
+cd backend-environment-configuration
+bash run-arm.sh
 ```
 
 **On Windows run the script with gitbash.**
@@ -36,7 +43,9 @@ To build the stack use one of two profiles:
 
 You might need a few seconds for the services to start before accessing them.
 
-#### Run On Linux/Mac
+#### Run On x64
+
+##### Mac/Linux:
 ```shell
 cd backend-environment-configuration
 bash run.sh
@@ -48,5 +57,12 @@ cd backend-environment-configuration
 bash run.sh backend
 ```
 
-#### Run On Windows
-**On Windows run the script with gitbash.** (bat script is being fixed).
+#### Windows
+**On Windows run the script with gitbash.**
+
+
+#### Run On ARM
+```shell
+cd backend-environment-configuration
+bash run-arm.sh
+```
